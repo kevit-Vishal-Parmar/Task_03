@@ -29,6 +29,7 @@ router.post("/absent", async (req, res) => {
 })
 
 router.post("/absent/75", async (req, res) => {
+    const TotalDays = 300;
     const StudentList = [];
     try {
         const data = await studentAttendance.aggregate([
@@ -90,8 +91,8 @@ router.post("/absent/75", async (req, res) => {
             }
         ])
         data.forEach(element => {
-            if (((element.PresentDay / element.AbsentDay) * 100) < 75) {
-                element["Attendance(%)"] = Math.round(((element.PresentDay / element.AbsentDay) * 100)) + "%";
+            if (((element.PresentDay / TotalDays) * 100) < 75) {
+                element["Attendance(%)"] = Math.round(((element.PresentDay / TotalDays) * 100));
                 StudentList.push(element)
             }
         });
