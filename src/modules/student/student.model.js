@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 require("../../database/db")
 
+//schema for Student information to insert a correct information about the student.
 const AddStudent = new mongoose.Schema({
     no : {
         type : Number,
@@ -30,8 +31,8 @@ const AddStudent = new mongoose.Schema({
     }
 })
 
+//model for Student to insert a student details in database.
 const NewStudent = mongoose.model('student',AddStudent);
 
-module.exports = {
-    NewStudent
-}
+//export a model.
+module.exports = NewStudent;

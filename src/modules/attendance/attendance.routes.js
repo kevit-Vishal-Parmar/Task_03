@@ -3,6 +3,7 @@ const router = express.Router();
 const { studentAttendance } = require("./attendance.model");
 require("../../database/db")
 
+//routes for add a student attendance into database.
 router.post("/attendance", async (req, res) => {
     try {
         const Student = new studentAttendance(req.body);
@@ -13,6 +14,7 @@ router.post("/attendance", async (req, res) => {
     }
 })
 
+//routes for get a date,department,semester,year wish absent student list.
 router.post("/absent", async (req, res) => {
     try {
         const data = await studentAttendance.find({
@@ -28,8 +30,9 @@ router.post("/absent", async (req, res) => {
     }
 })
 
+//routes for get a student list this attendance is less then 75% for year,semester,department wise.
 router.post("/absent/75", async (req, res) => {
-    const TotalDays = 300;
+    const TotalDays = 30;
     const StudentList = [];
     try {
         const data = await studentAttendance.aggregate([
@@ -92,14 +95,16 @@ router.post("/absent/75", async (req, res) => {
         ])
         data.forEach(element => {
             if (((element.PresentDay / TotalDays) * 100) < 75) {
+                //add new propertie for show a studnent attendance in persentage for every student.
                 element["Attendance(%)"] = Math.round(((element.PresentDay / TotalDays) * 100));
-                element["PresentDay"] = TotalDays - element.AbsentDay;
                 StudentList.push(element)
             }
         });
-        res.send(StudentList)
+        res.send(StudentList) 
     } catch (e) {
         res.send(e.message)
     }
 })
+
+//export a router.
 module.exports = router;

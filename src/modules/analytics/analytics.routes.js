@@ -22,6 +22,7 @@ OUTPUT:-
  }]
 */
 
+//routes to get analytics of student data for year wise.
 router.get("/analytics", async (req, res) => {
     const data = await batches.aggregate([
         {
@@ -74,6 +75,8 @@ OUTPUT:-
     }
 }
  */
+
+//routes ot get a vacantseats for year&branch wise
 router.get("/vacantseats", async (req, res) => {
     const data = await batches.aggregate([
         {
@@ -114,4 +117,5 @@ router.get("/vacantseats", async (req, res) => {
     res.send(data)
 })
 
+//export router.
 module.exports = router;
