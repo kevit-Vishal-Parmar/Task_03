@@ -43,4 +43,4 @@ const studentAttendance = mongoose.model('student_Attendance', Student);
 
 
 //export a model.
-module.exports = studentAttendance;
+module.exports = {studentAttendance};

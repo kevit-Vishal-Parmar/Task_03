@@ -35,4 +35,4 @@ const AddStudent = new mongoose.Schema({
 const NewStudent = mongoose.model('student',AddStudent);
 
 //export a model.
-module.exports = NewStudent;
+module.exports = {NewStudent};
